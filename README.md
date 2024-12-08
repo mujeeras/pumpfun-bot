@@ -1,10 +1,14 @@
 ## Pump.fun Solana Trading and Sniping Bot
 
-<<<<<<< HEAD
-=======
+=============================
 Copyright © Diveinprogramming
+=============================
 
->>>>>>> e08e325 (Update No Developer Fee feature)
+1. **Install dependencies**:
+   \`\`\`sh
+   npm install dotenv axios @solana/web3.js @solana/spl-token selenium-webdriver fs bs58 blessed blessed-contrib
+   \`\`\`
+
 Welcome to the Pump.fun Solana Trading Bot! This tool, developed by Diveinprogramming, is designed for trading and sniping new token launches on pump.fun. It includes strategies for buying and selling tokens based on market cap changes and bonding curve progress.
 
 ## Overview
@@ -45,22 +49,11 @@ The Solana Trading Bot helps you trade tokens on the Pump.fun on Solana blockcha
 
 3. **Set up your environment variables**:
    Create a .env file in the root directory and add the following:
-<<<<<<< HEAD
-  
-=======
-
->>>>>>> e08e325 (Update No Developer Fee feature)
-   ```env
+   
    SOLANA_WALLET_PATH=/path/to/your/solana/wallet.json
    MINIMUM_BUY_AMOUNT=0.015
    MAX_BONDING_CURVE_PROGRESS=10
    SELL_BONDING_CURVE_PROGRESS=15
-<<<<<<< HEAD
-  
-=======
-
-   ```
->>>>>>> e08e325 (Update No Developer Fee feature)
 
 4. **Configure Solana CLI**:
    \`\`\`sh
@@ -72,7 +65,7 @@ The Solana Trading Bot helps you trade tokens on the Pump.fun on Solana blockcha
 
 - **Run the trading bot**:
   \`\`\`sh
-  node script.mjs
+  node main.mjs
   \`\`\`
 
 - **Sell all SPL tokens**:
@@ -84,7 +77,7 @@ The Solana Trading Bot helps you trade tokens on the Pump.fun on Solana blockcha
 
 If you find this tool useful, please consider supporting the developer. Donations can be sent to:
 
-- Solana Address: A8Gx5FzviyLNtRugg4s2VBrdncPumiLZnyXCikCC5GEf
+- Solana Address: 3vvnenyjwicBq3WEdQQNGMnaodHXBzSPubdhoBP3YA3N
 
 ## About
 
