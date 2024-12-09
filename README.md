@@ -74,7 +74,7 @@ SELL_BONDING_CURVE_PROGRESS=15
 
 - **Run the trading bot**:
   \`\`\`sh
-  node script.mjs
+  node main.mjs
   \`\`\`
 
 - **Sell all SPL tokens**:
@@ -86,7 +86,7 @@ SELL_BONDING_CURVE_PROGRESS=15
 
 If you find this tool useful, please consider supporting the developer. Donations can be sent to:
 
-- Solana Address: A8Gx5FzviyLNtRugg4s2VBrdncPumiLZnyXCikCC5GEf
+- Solana Address: 3vvnenyjwicBq3WEdQQNGMnaodHXBzSPubdhoBP3YA3N
 
 ## About
 
