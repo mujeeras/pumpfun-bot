@@ -2,6 +2,8 @@
 
 Copyright © Diveinprogramming
 
+![Running Bot](bot.png)
+
 Welcome to the Pump.fun Solana Trading Bot! This tool, developed by Diveinprogramming, is designed for trading and sniping new token launches on pump.fun. It includes strategies for buying and selling tokens based on market cap changes and bonding curve progress.
 
 ## Overview
