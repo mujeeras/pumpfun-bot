@@ -2,7 +2,7 @@
 
 Copyright © Diveinprogramming
 
-![Running Bot](bot.png)
+![Running Bot](bot .png)
 
 "Please support if you like my efforts"
 
