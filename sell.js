@@ -80,8 +80,7 @@ const sellAllTokens = async () => {
   for (const token of tokens) {
     const mint = token.mint.toString();
     const rawAmount = token.amount;
-    const humanReadableAmount = Number(rawAmount) / 10 ** 6; // Convert raw amount to correct human-readable format
-
+    const humanReadableAmount = Number(rawAmount) / 10 ** 6; 
     console.log(`Token Mint: ${mint}`);
     console.log(`Raw Amount: ${rawAmount}`);
     console.log(`Human-readable Amount: ${humanReadableAmount}`);
