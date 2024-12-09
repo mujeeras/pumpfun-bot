@@ -78,6 +78,9 @@ If you find this tool useful, please consider supporting the developer. Donation
 
 This tool is developed by Diveinprogramming. It is designed to help traders effectively manage their trades on the Solana blockchain, especially for new token launches on pump.fun. The bot keeps moon bags and times trades efficiently to maximize profits and minimize losses.
 
+## keywords
+pump.fun | pumpfun | pump-fun | trading | sniping | snipper | jito tip | jito bundle | auto buy sell | low fees | bot | solana | secure | audit | sniper | pumpfun-bot |  web scraper | 100x | github | telegarm | copy trading | insider wallet |  moonshot bot |  make money | buy tracker bot | micro buy | memecoin | meme coins | pump dump |  ai bot | 
+
 ## Disclaimer
 
 Use this tool at your own risk. Trading cryptocurrencies involves significant risk and can result in the loss of your capital. Always do your own research before making any trading decisions.
