@@ -34,23 +34,24 @@ The Solana Trading Bot helps you trade tokens on the Pump.fun on Solana blockcha
 ## Installation
 
 1. **Download zip from repository**:
-
+   git clone  https://github.com/Diveinprogramming/pumpfun-sniping-bot.git
+   
    cd solana-trading-bot
 
-2. **Install dependencies**:
+3. **Install dependencies**:
    \`\`\`sh
    npm install dotenv axios @solana/web3.js @solana/spl-token selenium-webdriver nodemailer fs bs58 blessed blessed-contrib
 
    \`\`\`
 
-3. **Set up your environment variables**:
+4. **Set up your environment variables**:
    Create a .env file in the root directory and add the following:
 SOLANA_WALLET_PATH=/path/to/your/solana/wallet.json
 MINIMUM_BUY_AMOUNT=0.015
 MAX_BONDING_CURVE_PROGRESS=10
 SELL_BONDING_CURVE_PROGRESS=15
 
-4. **Configure Solana CLI**:
+5. **Configure Solana CLI**:
    \`\`\`sh
    solana config set --url https://api.mainnet-beta.solana.com
    solana config set --keypair /path/to/your/solana/wallet.json
