@@ -41,6 +41,7 @@ const pumpFunSell = async (mint, amount) => {
     priorityFee: 0.003, // Adjust priority fee if needed
     userPrivateKey: bs58.encode(privateKey),
   };
+  
 
   try {
     const response = await axios.post(url, data);
